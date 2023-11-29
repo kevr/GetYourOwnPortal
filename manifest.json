@@ -1,0 +1,9 @@
+{
+    "name": "GetYourOwnPortal",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/kevr/GetYourOwnPortal",
+    "description": "A mod that provides player ownership of portals",
+    "dependencies": [
+        "denikson-BepInExPack_Valheim-5.4.2202"
+    ]
+}
