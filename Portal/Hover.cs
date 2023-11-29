@@ -37,9 +37,9 @@ static class GetHoverText
         __result = __result.Replace($"\"{portalPrefix}", "\"");
 
         StringBuilder sb = new();
-        sb.Append(Environment.NewLine);
         if (info.playerName == Player.m_localPlayer.GetPlayerName())
         {
+            sb.Append(Environment.NewLine);
             sb.Append("[<color=yellow>LAlt+E<color=white>] Disown");
         }
 

@@ -32,6 +32,10 @@ static class Create
 
     static void Postfix(Piece __instance, long uid)
     {
+        Logger.LogInfo($"Piece name: '{__instance.name}'");
+        if (!__instance.name.StartsWith("portal_wood"))
+            return;
+
         TeleportWorld port = __instance.GetComponentInChildren<TeleportWorld>();
         string playerName = Player.m_localPlayer.GetPlayerName();
         m_setup.Add(port.GetInstanceID());

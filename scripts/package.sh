@@ -11,6 +11,7 @@ files=(
     README.md
     CHANGELOG.md
     bin/Release/net461/GetYourOwnPortal.dll
+    bin/Release/net461/ServerSync.dll
 )
 
 for f in ${files[@]}; do

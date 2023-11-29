@@ -5,19 +5,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace GetYourOwnPortal.Portal;
 
-[HarmonyPatch(typeof(Destructible), nameof(Destructible.Destroy), typeof(UnityEngine.Vector3), typeof(UnityEngine.Vector3))]
+[HarmonyPatch(typeof(Player), nameof(Player.RemovePiece))]
 static class Destroy
 {
     public static ManualLogSource Logger = new ManualLogSource($"{Plugin.GUID}.Destroy");
 
-    static bool Prefix(Destructible __instance, UnityEngine.Vector3 hitPoint, UnityEngine.Vector3 hitDir)
+    static bool Prefix(Player __instance)
     {
-        TeleportWorld portal = __instance.GetComponentInChildren<TeleportWorld>();
-        if (portal == null)
+        Logger.LogInfo("Destroying a piece...");
+
+        Piece piece;
+        if (!Physics.Raycast(GameCamera.instance.transform.position, GameCamera.instance.transform.forward, out var hitInfo, 50f, __instance.m_removeRayMask) && Vector3.Distance(hitInfo.point, __instance.m_eye.position) < __instance.m_maxPlaceDistance)
+        {
+            Logger.LogError("Raycast failed");
             return true;
+        }
+
+        piece = hitInfo.collider.GetComponentInParent<Piece>();
+        if (piece == null && (bool)hitInfo.collider.GetComponent<Heightmap>())
+        {
+            piece = TerrainModifier.FindClosestModifierPieceInRange(hitInfo.point, 2.5f);
+        }
+
+        if (!(bool)piece)
+            return true;
+
+        Logger.LogInfo($"Piece: '{piece.name}'");
+        if (piece.name != "portal_wood(Clone)")
+            return true;
+
+        Logger.LogInfo("Destroying portal...");
+
+        TeleportWorld portal = piece.GetComponentInChildren<TeleportWorld>();
+        Logger.LogInfo("Portal exists...");
 
         string text = portal.GetText();
         if (text.IndexOf(PortalInfo.DELIM) == -1)
@@ -25,10 +49,9 @@ static class Destroy
 
         PortalInfo info = Util.GetPortalInfo(text);
         string localPlayerName = Player.m_localPlayer.GetPlayerName();
-        bool isAdmin = ZNet.instance.IsAdmin(ZNet.GetPublicIP());
 
         // If the user isn't an admin and they don't own the portal, error out.
-        if (!isAdmin && localPlayerName != info.playerName)
+        if (!Plugin.PlayerIsAdmin() && localPlayerName != info.playerName)
         {
             Player.m_localPlayer.Message(
                 MessageHud.MessageType.Center,

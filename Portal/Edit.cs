@@ -41,8 +41,15 @@ static class TeleportWorldInteract
         if (Input.GetKey(KeyCode.LeftAlt))
         {
             PortalInfo info = Util.GetPortalInfo(__instance.GetText());
-            Create.Add(__instance.GetInstanceID());
-            __instance.SetText(info.text);
+            string playerName = Player.m_localPlayer.GetPlayerName();
+
+            // If the interacting player is the portal's owner...
+            if (playerName == info.playerName)
+            {
+                // Then disown the portal.
+                Create.Add(__instance.GetInstanceID());
+                __instance.SetText(info.text);
+            }
             return false;
         }
 
