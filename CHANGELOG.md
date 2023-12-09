@@ -1,4 +1,7 @@
 ## Changelog
+### 1.0.3
+- Fixed null usage error
+
 ### 1.0.2
 - Bump version for CHANGELOG fix
 

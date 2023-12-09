@@ -31,11 +31,11 @@ static class Destroy
             piece = TerrainModifier.FindClosestModifierPieceInRange(hitInfo.point, 2.5f);
         }
 
-        if (!(bool)piece)
+        if (piece == null || !(bool)piece)
             return true;
 
         Logger.LogInfo($"Piece: '{piece.name}'");
-        if (piece.name != "portal_wood(Clone)")
+        if (!piece.name.StartsWith("portal_wood"))
             return true;
 
         Logger.LogInfo("Destroying portal...");
