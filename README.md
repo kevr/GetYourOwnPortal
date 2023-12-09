@@ -33,3 +33,10 @@ Example of connecting a portal between two players:
 3. *Player B* creates a portal and names it *AtoB*
 4. *Player B* disowns the *AtoB* portal
 5. The two disowned *AtoB* portals connect
+
+
+## Donations
+
+I spend most of my time these days playing and modding Valheim. Any donations are greatly appreciated and can be given through my [Buy Me A Coffee](https://www.buymeacoffee.com/kevver) page.
+
+Thanks to all of those who support my work! This kind of support gives me more ability to work on mods with my time :)

@@ -1,4 +1,7 @@
 ## Changelog
+### 1.0.4
+- Added Buy Me A Coffee info to README
+
 ### 1.0.3
 - Fixed null usage error
 

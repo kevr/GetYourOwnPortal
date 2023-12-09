@@ -15,7 +15,7 @@ public class Plugin : BaseUnityPlugin
     public const string NAME = "GetYourOwnPortal";
     public const string AUTHOR = "Kevver";
     public const string GUID = $"{AUTHOR}.{NAME}";
-    public const string VERSION = "1.0.3";
+    public const string VERSION = "1.0.4";
 
     // HarmonyLib handle
     static readonly Harmony harmony = new(NAME);
