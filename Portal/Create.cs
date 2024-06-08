@@ -33,7 +33,7 @@ static class Create
     static void Postfix(Piece __instance, long uid)
     {
         Logger.LogInfo($"Piece name: '{__instance.name}'");
-        if (!__instance.name.StartsWith("portal_wood"))
+        if (!__instance.name.StartsWith("portal_"))
             return;
 
         TeleportWorld port = __instance.GetComponentInChildren<TeleportWorld>();

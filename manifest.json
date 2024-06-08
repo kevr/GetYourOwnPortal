@@ -1,6 +1,6 @@
 {
     "name": "GetYourOwnPortal",
-    "version_number": "1.0.4",
+    "version_number": "1.0.5",
     "website_url": "https://github.com/kevr/GetYourOwnPortal",
     "description": "A mod that provides player ownership of portals",
     "dependencies": [
